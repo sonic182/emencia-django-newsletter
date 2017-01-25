@@ -18,7 +18,7 @@ try:
     from django.utils.encoding import force_unicode
 except Exception as e:
     from django.utils.encoding import force_text as force_unicode
-    
+
 
 from tagging.fields import TagField
 from emencia.django.newsletter.managers import ContactManager
@@ -289,12 +289,13 @@ class Link(models.Model):
         verbose_name_plural = _('links')
 
 
+def get_newsletter_storage_path(instance, filename):
+    filename = force_unicode(filename)
+    return '/'.join([BASE_PATH, instance.newsletter.slug, filename])
+
+
 class Attachment(models.Model):
     """Attachment file in a newsletter"""
-
-    def get_newsletter_storage_path(self, filename):
-        filename = force_unicode(filename)
-        return '/'.join([BASE_PATH, self.newsletter.slug, filename])
 
     newsletter = models.ForeignKey(Newsletter, verbose_name=_('newsletter'))
     title = models.CharField(_('title'), max_length=255)
