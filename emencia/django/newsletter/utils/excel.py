@@ -4,7 +4,8 @@ import datetime
 
 from django.http import HttpResponse
 from django.db.models.query import QuerySet
-from django.db.models.query import ValuesQuerySet
+# from django.db.models.query import ValuesQuerySet
+from django.db.models.query import ValuesIterable
 
 
 class ExcelResponse(HttpResponse):
@@ -13,7 +14,7 @@ class ExcelResponse(HttpResponse):
     def __init__(self, data, output_name='excel_data', headers=None,
                  force_csv=False, encoding='utf8'):
         valid_data = False
-        if isinstance(data, ValuesQuerySet):
+        if isinstance(data, ValuesIterable):
             data = list(data)
         elif isinstance(data, QuerySet):
             data = list(data.values())

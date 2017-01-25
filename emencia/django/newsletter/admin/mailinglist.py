@@ -2,8 +2,10 @@
 from datetime import datetime
 
 from django.contrib import admin
-from django.conf.urls.defaults import url
-from django.conf.urls.defaults import patterns
+# from django.conf.urls.defaults import url
+# from django.conf.urls.defaults import patterns
+from django.conf.urls import url
+
 from django.utils.encoding import smart_str
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
@@ -115,7 +117,7 @@ class MailingListAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         urls = super(MailingListAdmin, self).get_urls()
-        my_urls = patterns('',
+        my_urls = ('',
                            url(r'^export/vcard/(?P<mailinglist_id>\d+)/$',
                                self.admin_site.admin_view(self.exportion_vcard),
                                name='newsletter_mailinglist_export_vcard'),

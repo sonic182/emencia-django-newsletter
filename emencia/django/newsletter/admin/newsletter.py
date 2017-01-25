@@ -177,6 +177,7 @@ if USE_TINYMCE:
 
         class Meta:
             model = Newsletter
+            fields = '__all__'
 
     class NewsletterAdmin(BaseNewsletterAdmin):
         form = NewsletterTinyMCEForm
