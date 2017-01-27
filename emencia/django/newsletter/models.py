@@ -177,8 +177,7 @@ class MailingList(models.Model):
     subscribers = models.ManyToManyField(Contact, verbose_name=_('subscribers'),
                                          related_name='mailinglist_subscriber')
     unsubscribers = models.ManyToManyField(Contact, verbose_name=_('unsubscribers'),
-                                           related_name='mailinglist_unsubscriber',
-                                           null=True, blank=True)
+                                           related_name='mailinglist_unsubscriber')
 
     creation_date = models.DateTimeField(_('creation date'), auto_now_add=True)
     modification_date = models.DateTimeField(_('modification date'), auto_now=True)
@@ -227,8 +226,7 @@ class Newsletter(models.Model):
                                default=_('<body>\n<!-- Edit your newsletter here -->\n</body>'))
 
     mailing_list = models.ForeignKey(MailingList, verbose_name=_('mailing list'))
-    test_contacts = models.ManyToManyField(Contact, verbose_name=_('test contacts'),
-                                           blank=True, null=True)
+    test_contacts = models.ManyToManyField(Contact, verbose_name=_('test contacts'))
 
     server = models.ForeignKey(SMTPServer, verbose_name=_('smtp server'),
                                default=1)
@@ -358,12 +356,9 @@ class WorkGroup(models.Model):
     name = models.CharField(_('name'), max_length=255)
     group = models.ForeignKey(Group, verbose_name=_('permissions group'))
 
-    contacts = models.ManyToManyField(Contact, verbose_name=_('contacts'),
-                                      blank=True, null=True)
-    mailinglists = models.ManyToManyField(MailingList, verbose_name=_('mailing lists'),
-                                          blank=True, null=True)
-    newsletters = models.ManyToManyField(Newsletter, verbose_name=_('newsletters'),
-                                         blank=True, null=True)
+    contacts = models.ManyToManyField(Contact, verbose_name=_('contacts'))
+    mailinglists = models.ManyToManyField(MailingList, verbose_name=_('mailing lists'))
+    newsletters = models.ManyToManyField(Newsletter, verbose_name=_('newsletters'))
 
     def __unicode__(self):
         return self.name
