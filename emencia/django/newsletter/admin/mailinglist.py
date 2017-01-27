@@ -117,11 +117,11 @@ class MailingListAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         urls = super(MailingListAdmin, self).get_urls()
-        my_urls = ('',
+        my_urls = [
                            url(r'^export/vcard/(?P<mailinglist_id>\d+)/$',
                                self.admin_site.admin_view(self.exportion_vcard),
                                name='newsletter_mailinglist_export_vcard'),
                            url(r'^export/excel/(?P<mailinglist_id>\d+)/$',
                                self.admin_site.admin_view(self.exportion_excel),
-                               name='newsletter_mailinglist_export_excel'))
+                           name='newsletter_mailinglist_export_excel')]
         return my_urls + urls

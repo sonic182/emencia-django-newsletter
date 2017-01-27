@@ -170,7 +170,7 @@ class ContactAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         urls = super(ContactAdmin, self).get_urls()
-        my_urls = ('',
+        my_urls = [
                            url(r'^import/$',
                                self.admin_site.admin_view(self.importation),
                                name='newsletter_contact_import'),
@@ -182,5 +182,5 @@ class ContactAdmin(admin.ModelAdmin):
                                name='newsletter_contact_export_vcard'),
                            url(r'^export/excel/$',
                                self.admin_site.admin_view(self.exportation_excel),
-                               name='newsletter_contact_export_excel'),)
+                            name='newsletter_contact_export_excel')]
         return my_urls + urls
